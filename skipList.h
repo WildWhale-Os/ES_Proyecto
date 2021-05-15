@@ -7,10 +7,11 @@ struct nodo {
 class skipList : public Miniset {
 private:
   int nivelmax;
-  double probabilidad;
+  int actLevel;
   nodo *head;
   int size;
   bool flipCoin();
+  int newLevel();
 
 public:
   skipList();
