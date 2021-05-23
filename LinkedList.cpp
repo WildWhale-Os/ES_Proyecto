@@ -1,10 +1,10 @@
-#include <iostream>
 #include "LinkedList.h"
+#include <iostream>
 
 using namespace std;
 
 LinkedList::LinkedList() {
-  this->head = nullptr;
+  this->head = new nodo();
   this->mysize = 0;
 }
 
@@ -16,27 +16,24 @@ LinkedList::~LinkedList() {
     mysize--;
   }
 }
+
 bool LinkedList::search(int n) {
   nodo *actual = head;
-  while(actual->n < n && actual){
+  while (actual->siguiente != nullptr && actual->siguiente->n < n) {
     actual = actual->siguiente;
   }
-  if(actual && actual->n == n){
+  if (actual->siguiente != nullptr && actual->siguiente->n == n) {
     return true;
   }
   return false;
 }
 
 void LinkedList::insert(int n) {
-  if (!head) {
-    head->n = n;
-    head->siguiente = nullptr;
-    mysize++;
-  } else if (!search(n)) {
-    nodo *aux = head;
-    while (aux->siguiente->n < n) {
-      aux = aux->siguiente;
-    }
+  nodo *aux = head;
+  while (aux->siguiente != nullptr && aux->siguiente->n < n) {
+    aux = aux->siguiente;
+  }
+  if (aux->siguiente == nullptr || aux->siguiente->n != n) {
     nodo *nuevo = new nodo();
     nuevo->n = n;
     nuevo->siguiente = aux->siguiente;
@@ -47,19 +44,15 @@ void LinkedList::insert(int n) {
 
 void LinkedList::remove(int n) {
   nodo *actual = head;
-  if (head->n == n) head = actual->siguiente;
-  else {
-    actual = head->siguiente;
-    nodo *prev = nullptr;
-    while (actual && actual->n != n) {
-      prev = actual;
-      actual = prev->siguiente;
-    }
-    if (actual->siguiente)
-      prev->siguiente = actual->siguiente; // elemento en medio de la lista
-    else
-      prev->siguiente = nullptr; // ultimo elemento de la lista
+  while (actual->siguiente != nullptr && actual->siguiente->n < n) {
+    actual = actual->siguiente;
   }
-  delete actual;
-  mysize--;
+  if (actual->siguiente && actual->siguiente->n == n){
+    nodo *next = nullptr;
+    next = actual->siguiente;
+    actual->siguiente = next->siguiente;
+    delete next;
+    mysize--;
+  }
+
 }

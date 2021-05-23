@@ -1,14 +1,13 @@
 #include "Miniset.h"
-#include <iostream>
-struct nodo {
+struct skipNodo {
   int n;
-  nodo **next;
+  skipNodo **next;
 };
 class skipList : public Miniset {
 private:
   int nivelmax;
   int actLevel;
-  nodo *head;
+  skipNodo *head;
   int size;
   bool flipCoin();
   int newLevel();
