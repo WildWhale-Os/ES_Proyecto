@@ -9,6 +9,7 @@ private:
   int actLevel;
   skipNodo *head;
   int size;
+  int totalsize;
   bool flipCoin();
   int newLevel();
 
@@ -18,4 +19,5 @@ public:
   void insert(int n);
   void remove(int n);
   bool search(int n);
+  int getTotalSize();
 };

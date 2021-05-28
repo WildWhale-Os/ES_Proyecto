@@ -5,13 +5,15 @@ struct nodo {
 };
 
 class LinkedList: public Miniset {
-	private:
-		struct nodo *head;
-		int mysize;
-	public:
-		LinkedList();
-		~LinkedList();
-		void insert(int n);
-		void remove(int n);
-		bool search(int n);
+private:
+    struct nodo *head;
+    int mysize;
+    int totalsize;
+public:
+    LinkedList();
+    ~LinkedList();
+    void insert(int n);
+    void remove(int n);
+    bool search(int n);
+    int getTotalSize();
 };

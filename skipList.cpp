@@ -3,9 +3,9 @@
 skipList::skipList() {
   nivelmax = 4;
   actLevel = 0;
+  totalsize = 0;
   head = new skipNodo();
   head->next = new skipNodo *[nivelmax + 1];
-  size = 0;
   srand(time(nullptr));
 }
 skipList::~skipList() {
@@ -50,6 +50,7 @@ void skipList::insert(int n) {
     skipNodo *rookie = new skipNodo();
     rookie->n = n;
     rookie->next = new skipNodo *[nlevel + 1];
+    totalsize += sizeof(*rookie);
     for (int i = 0; i <= nlevel; i++) {
       rookie->next[i] = path[i]->next[i];
       path[i]->next[i] = rookie;
@@ -76,6 +77,7 @@ void skipList::remove(int n) {
     }
 
     delete actual;
+    totalsize--;
   }
   while (actLevel > 0 && head->next[actLevel] == 0)
     actLevel--;
@@ -96,4 +98,8 @@ bool skipList::search(int n) {
     nivel--;
   }
   return where;
+}
+
+int skipList::getTotalSize(){
+  return totalsize;
 }

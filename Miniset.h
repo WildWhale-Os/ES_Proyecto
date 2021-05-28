@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 #ifndef MINISET_H
 #define MINISET_H

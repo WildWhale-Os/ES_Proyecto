@@ -56,3 +56,7 @@ void LinkedList::remove(int n) {
   }
 
 }
+
+int LinkedList::getTotalSize(){
+  return sizeof(nodo) * mysize;
+}
